@@ -1,0 +1,406 @@
+:root {
+    --bg: #050a0f;
+    --surface: #0d1117;
+    --surface-2: rgba(255, 255, 255, 0.05);
+    --mint: #00f5a0;
+    --danger: #ff3b5c;
+    --neutral: #8b9ab0;
+    --text: #edf4ff;
+    --border: rgba(255, 255, 255, 0.1);
+    --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    --radius: 22px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, rgba(0, 245, 160, 0.08), transparent 28%),
+        radial-gradient(circle at 85% 12%, rgba(255, 59, 92, 0.1), transparent 20%),
+        linear-gradient(180deg, #07111a 0%, var(--bg) 55%, #03070b 100%);
+    color: var(--text);
+    font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+}
+
+main {
+    padding: 7rem 1.5rem 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+.grid-background,
+.grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.grid-background {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+    opacity: 0.25;
+}
+
+.grain-overlay {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 0.7px, transparent 0.7px);
+    background-size: 7px 7px;
+    opacity: 0.03;
+}
+
+.site-header {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1180px, calc(100% - 2rem));
+    z-index: 10;
+}
+
+.glass-nav,
+.scan-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(16px);
+}
+
+.glass-nav {
+    border-radius: 999px;
+    padding: 1rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+    font-family: "Syne", sans-serif;
+    letter-spacing: 0.06em;
+}
+
+.brand-mark {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 245, 160, 0.45);
+    border-radius: 50%;
+}
+
+.lens-core {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--text);
+    border-radius: 50%;
+}
+
+.scanline {
+    position: absolute;
+    top: 50%;
+    left: -12%;
+    width: 124%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--mint), transparent);
+    animation: scan-x 3.4s linear infinite;
+    box-shadow: 0 0 16px rgba(0, 245, 160, 0.75);
+}
+
+.site-nav {
+    display: flex;
+    gap: 1.2rem;
+    color: var(--neutral);
+}
+
+.site-nav a:hover {
+    color: var(--text);
+}
+
+.page-shell,
+.hero-panel,
+.feature-grid {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+}
+
+.hero-panel,
+.dashboard-layout,
+.chart-grid,
+.stats-grid,
+.feature-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.hero-panel {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    min-height: calc(100vh - 10rem);
+}
+
+.eyebrow,
+.counter-label,
+.feature-kicker,
+.metric-bar label,
+.mono-feed,
+.metadata-table {
+    font-family: "JetBrains Mono", monospace;
+}
+
+.eyebrow,
+.feature-kicker {
+    color: var(--mint);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.77rem;
+}
+
+h1,
+h2 {
+    font-family: "Syne", sans-serif;
+    margin: 0 0 0.75rem;
+}
+
+h1 {
+    font-size: clamp(3rem, 6vw, 5.4rem);
+    line-height: 0.96;
+}
+
+h2 {
+    font-size: 1.55rem;
+}
+
+.hero-text,
+.feature-card p,
+.explanation-text {
+    color: var(--neutral);
+    line-height: 1.7;
+}
+
+.button {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 0.95rem 1.35rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+}
+
+.button-primary {
+    background: linear-gradient(135deg, var(--mint), #0fc2a0);
+    color: #04110b;
+    box-shadow: 0 10px 30px rgba(0, 245, 160, 0.25);
+}
+
+.button-secondary {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.hero-actions,
+.action-row,
+.site-nav,
+.filter-bar,
+.pagination-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    align-items: center;
+}
+
+.scan-card {
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.scan-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 245, 160, 0.5), rgba(255, 255, 255, 0.03), rgba(255, 59, 92, 0.35));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.hero-visual,
+.face-silhouette,
+.face-outline {
+    min-height: 500px;
+}
+
+.face-silhouette {
+    position: relative;
+    border-radius: 26px;
+    background:
+        radial-gradient(circle at center, rgba(0, 245, 160, 0.12), transparent 35%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+    overflow: hidden;
+}
+
+.face-outline {
+    position: absolute;
+    inset: 12% 26%;
+    border: 2px solid rgba(237, 244, 255, 0.75);
+    border-radius: 46% 46% 40% 40% / 38% 38% 52% 52%;
+    filter: drop-shadow(0 0 16px rgba(0, 245, 160, 0.18));
+}
+
+.face-grid,
+.hero-scanline {
+    position: absolute;
+    inset: 0;
+}
+
+.face-grid {
+    background-image: linear-gradient(rgba(0, 245, 160, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 245, 160, 0.12) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: radial-gradient(circle at center, black 35%, transparent 82%);
+}
+
+.hero-scanline {
+    background: linear-gradient(180deg, transparent, rgba(0, 245, 160, 0.45), transparent);
+    height: 24%;
+    animation: scan-y 4s ease-in-out infinite;
+}
+
+.counter-strip {
+    margin-top: 2rem;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.stat-counter {
+    font-size: 2.5rem;
+    color: var(--text);
+}
+
+.feature-grid,
+.stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.danger {
+    color: var(--danger);
+}
+
+.verified {
+    color: var(--mint);
+}
+
+.neutral {
+    color: #9cb3ff;
+}
+
+.panel-header {
+    margin-bottom: 1.25rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.toast-stack {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 20;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.toast {
+    min-width: 260px;
+    padding: 0.95rem 1rem;
+    border-radius: 16px;
+    background: rgba(13, 17, 23, 0.96);
+    border: 1px solid var(--border);
+    color: var(--text);
+    box-shadow: var(--shadow);
+}
+
+.toast.error {
+    border-color: rgba(255, 59, 92, 0.45);
+}
+
+.toast.success {
+    border-color: rgba(0, 245, 160, 0.45);
+}
+
+@media (max-width: 980px) {
+    .hero-panel,
+    .dashboard-layout,
+    .chart-grid,
+    .feature-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .glass-nav {
+        border-radius: 28px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    main {
+        padding-top: 9rem;
+    }
+}
+
+@media (max-width: 640px) {
+    h1 {
+        font-size: 2.6rem;
+    }
+
+    .scan-card,
+    .glass-nav {
+        padding: 1.1rem;
+    }
+
+    .hero-visual,
+    .face-silhouette,
+    .face-outline {
+        min-height: 340px;
+    }
+}

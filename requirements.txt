@@ -1,0 +1,10 @@
+Django>=4.2
+djangorestframework
+Pillow
+opencv-python
+numpy
+pandas
+python-magic
+django-cors-headers
+whitenoise
+psycopg2-binary

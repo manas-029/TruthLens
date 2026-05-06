@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}TruthLens | Result Detail{% endblock %}
+{% block page_id %}result{% endblock %}
+{% block content %}
+<section class="page-shell result-shell">
+    <section class="scan-card result-detail-card">
+        <div class="result-header">
+            <div>
+                <p class="eyebrow">Detailed forensic result</p>
+                <h1>{{ record.file_name }}</h1>
+            </div>
+            <div class="verdict-badge {{ record.verdict }}">{{ record.get_verdict_display }}</div>
+        </div>
+
+        <div class="result-grid">
+            <div class="forensic-visual">
+                <div class="heatmap-placeholder">
+                    <div class="heatmap-grid"></div>
+                    <div class="heatmap-hotspot one"></div>
+                    <div class="heatmap-hotspot two"></div>
+                    <div class="heatmap-hotspot three"></div>
+                </div>
+                <div class="waveform">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+            <div class="result-meta">
+                <div class="metric-bar">
+                    <label>Confidence Score</label>
+                    <div class="metric-track"><div class="metric-fill" style="width: {{ record.confidence_score }}%"></div></div>
+                </div>
+                <div class="metric-bar">
+                    <label>Facial Inconsistency</label>
+                    <div class="metric-track"><div class="metric-fill" style="width: {{ record.facial_inconsistency|default:0 }}%"></div></div>
+                </div>
+                <div class="metric-bar">
+                    <label>Audio Sync Score</label>
+                    <div class="metric-track"><div class="metric-fill" style="width: {{ record.audio_sync_score|default:0 }}%"></div></div>
+                </div>
+                <div class="metric-bar">
+                    <label>Compression Artifacts</label>
+                    <div class="metric-track"><div class="metric-fill" style="width: {{ record.compression_artifacts|default:0 }}%"></div></div>
+                </div>
+                <div class="metric-bar">
+                    <label>GAN Fingerprint</label>
+                    <div class="metric-track"><div class="metric-fill" style="width: {{ record.gan_fingerprint|default:0 }}%"></div></div>
+                </div>
+                <p class="explanation-text">{{ record.ai_explanation }}</p>
+            </div>
+        </div>
+
+        <table class="metadata-table">
+            <tr><th>File Type</th><td>{{ record.file_type|title }}</td></tr>
+            <tr><th>File Size</th><td>{{ metadata.file_size|default:"Unknown" }} bytes</td></tr>
+            <tr><th>Duration</th><td>{{ metadata.duration|default:"N/A" }}</td></tr>
+            <tr><th>Resolution</th><td>{{ metadata.resolution|default:"Unknown" }}</td></tr>
+            <tr><th>Codec</th><td>{{ metadata.codec|default:"Unknown" }}</td></tr>
+            <tr><th>Creation Date</th><td>{{ metadata.creation_date|default:"Unavailable" }}</td></tr>
+            <tr><th>Processing Time</th><td>{{ record.processing_time_ms }} ms</td></tr>
+        </table>
+
+        <div class="action-row">
+            <input class="share-link" type="text" readonly value="{{ request.build_absolute_uri }}">
+            <button class="button button-secondary" type="button" onclick="window.print()">Download Report (PDF)</button>
+            <button class="button button-primary" type="button">Report to Platform</button>
+        </div>
+    </section>
+</section>
+{% endblock %}
