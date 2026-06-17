@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: truthlens
-    env: python
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn truthlens.wsgi:application"
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.12
